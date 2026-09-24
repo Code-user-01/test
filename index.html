@@ -1,1 +1,3285 @@
 
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Parqueadero Villeta · Deja tu carro. Descubre Villeta.</title>
+    <meta
+      name="description"
+      content="Parqueadero seguro en Villeta, Cundinamarca. Tarifas, horarios, qué hacer en Villeta y negocios recomendados con acceso directo a Google Maps y Waze."
+    />
+    <meta name="theme-color" content="#FFC700" />
+
+    <!-- === FUENTES === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================================
+     1. TOKENS DE DISEÑO
+     Paleta HSL dual. El amarillo y el negro son constantes de
+     marca; solo cambian superficies y textos entre temas.
+     ========================================================= */
+      :root {
+        /* Marca */
+        --yellow-h: 47;
+        --yellow: hsl(var(--yellow-h) 100% 50%);
+        --yellow-soft: hsl(var(--yellow-h) 100% 50% / 0.16);
+        --yellow-glow: hsl(var(--yellow-h) 100% 50% / 0.35);
+        --black: hsl(0 0% 4%);
+        --black-2: hsl(0 0% 9%);
+        --white: hsl(0 0% 100%);
+
+        /* Tema claro */
+        --bg: var(--white);
+        --surface: hsl(0 0% 100%);
+        --surface-2: hsl(0 0% 96%);
+        --text: hsl(0 0% 6%);
+        --text-muted: hsl(0 0% 36%);
+        --line: hsl(0 0% 0% / 0.08);
+        --glass: hsl(0 0% 100% / 0.72);
+        --glass-line: hsl(0 0% 100% / 0.6);
+        --shadow-sm:
+          0 1px 2px hsl(0 0% 0% / 0.06), 0 4px 14px hsl(0 0% 0% / 0.05);
+        --shadow-lg:
+          0 2px 4px hsl(0 0% 0% / 0.05), 0 24px 60px -18px hsl(0 0% 0% / 0.28);
+        --neu:
+          6px 6px 16px hsl(0 0% 0% / 0.07), -6px -6px 16px hsl(0 0% 100% / 0.9);
+
+        /* Tipografía */
+        --font-display: "Outfit", system-ui, sans-serif;
+        --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, monospace;
+        --fs-xs: 0.8125rem;
+        --fs-sm: 0.9375rem;
+        --fs-md: 1.0625rem;
+        --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+        --fs-xl: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+        --fs-hero: clamp(2.75rem, 1.6rem + 6vw, 6.25rem);
+
+        /* Espaciado */
+        --space-2xs: 0.25rem;
+        --space-xs: 0.5rem;
+        --space-sm: 0.75rem;
+        --space-md: 1.25rem;
+        --space-lg: 2rem;
+        --space-xl: 3.5rem;
+        --space-2xl: clamp(4.5rem, 3rem + 6vw, 8rem);
+
+        /* Radios: jerarquía intencional, no uno para todo */
+        --r-sm: 0.75rem;
+        --r-md: 1.25rem;
+        --r-lg: 1.75rem;
+        --r-pill: 999px;
+
+        /* Movimiento cinematográfico */
+        --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+        --dur-fast: 0.25s;
+        --dur-base: 0.45s;
+        --dur-slow: 0.75s;
+
+        --header-h: 68px;
+        --container: 1200px;
+        --hazard: repeating-linear-gradient(
+          -45deg,
+          var(--yellow) 0 14px,
+          var(--black) 14px 28px
+        );
+      }
+
+      [data-theme="dark"] {
+        --bg: hsl(0 0% 5%);
+        --surface: hsl(0 0% 9%);
+        --surface-2: hsl(0 0% 12%);
+        --text: hsl(0 0% 96%);
+        --text-muted: hsl(0 0% 66%);
+        --line: hsl(0 0% 100% / 0.08);
+        --glass: hsl(0 0% 8% / 0.7);
+        --glass-line: hsl(0 0% 100% / 0.08);
+        --shadow-sm:
+          0 1px 2px hsl(0 0% 0% / 0.4), 0 6px 18px hsl(0 0% 0% / 0.35);
+        --shadow-lg: 0 30px 70px -20px hsl(0 0% 0% / 0.8);
+        --neu:
+          6px 6px 16px hsl(0 0% 0% / 0.5), -4px -4px 12px hsl(0 0% 100% / 0.03);
+      }
+
+      /* =========================================================
+     2. BASE Y RESET
+     ========================================================= */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: calc(
+          var(--header-h) + env(safe-area-inset-top, 0px)
+        );
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: var(--fs-md);
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+        transition:
+          background-color var(--dur-base) var(--ease-soft),
+          color var(--dur-base) var(--ease-soft);
+        padding-bottom: calc(
+          84px + env(safe-area-inset-bottom, 0px)
+        ); /* espacio para la barra móvil */
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display);
+        line-height: 1.05;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      p {
+        margin: 0;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      :focus-visible {
+        outline: 3px solid var(--yellow);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      .container {
+        width: min(100% - 2 * var(--space-md), var(--container));
+        margin-inline: auto;
+      }
+      .visually-hidden {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      .mono {
+        font-family: var(--font-mono);
+      }
+
+      /* =========================================================
+     3. BOTONES (componente reutilizable)
+     ========================================================= */
+      .btn {
+        --btn-bg: var(--surface-2);
+        --btn-fg: var(--text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        min-height: 52px;
+        padding: 0.8rem 1.4rem;
+        border: 1px solid transparent;
+        border-radius: var(--r-pill);
+        background: var(--btn-bg);
+        color: var(--btn-fg);
+        font-weight: 700;
+        font-size: var(--fs-sm);
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+          transform var(--dur-fast) var(--ease-cine),
+          box-shadow var(--dur-fast) var(--ease-cine),
+          background-color var(--dur-fast);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn:active {
+        transform: translateY(0) scale(0.97);
+      }
+      .btn--primary {
+        --btn-bg: var(--yellow);
+        --btn-fg: var(--black);
+        box-shadow: 0 10px 28px -10px var(--yellow-glow);
+      }
+      .btn--primary:hover {
+        box-shadow: 0 16px 36px -10px var(--yellow-glow);
+      }
+      .btn--dark {
+        --btn-bg: var(--black);
+        --btn-fg: var(--white);
+      }
+      [data-theme="dark"] .btn--dark {
+        --btn-bg: hsl(0 0% 16%);
+      }
+      .btn--glass {
+        --btn-bg: hsl(0 0% 100% / 0.1);
+        --btn-fg: var(--white);
+        border-color: hsl(0 0% 100% / 0.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .btn--outline {
+        --btn-bg: transparent;
+        border-color: currentColor;
+      }
+      .btn--block {
+        width: 100%;
+      }
+      .btn__icon {
+        font-size: 1.1em;
+        line-height: 1;
+      }
+
+      /* =========================================================
+     4. HEADER Y NAVEGACIÓN
+     ========================================================= */
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 50;
+        padding-top: env(safe-area-inset-top, 0px);
+        transition:
+          background-color var(--dur-base),
+          box-shadow var(--dur-base),
+          backdrop-filter var(--dur-base);
+      }
+      .site-header.is-scrolled,
+      .site-header.is-open {
+        background: var(--glass);
+        backdrop-filter: blur(18px) saturate(1.4);
+        -webkit-backdrop-filter: blur(18px) saturate(1.4);
+        box-shadow: 0 1px 0 var(--line);
+      }
+      .nav-bar {
+        height: var(--header-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-md);
+      }
+      .brand {
+        display: inline-flex;
+        white-space: nowrap;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .brand__mark {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        background: var(--yellow);
+        color: var(--black);
+        font-weight: 800;
+        font-size: 1.4rem;
+        box-shadow: inset 0 -3px 0 hsl(0 0% 0% / 0.15);
+      }
+      /* Sobre el hero oscuro el header es claro hasta hacer scroll */
+      .site-header:not(.is-scrolled):not(.is-open) .brand,
+      .site-header:not(.is-scrolled):not(.is-open) .icon-btn {
+        color: var(--white);
+      }
+
+      .nav-links {
+        display: none;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+      }
+      .icon-btn {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: var(--r-pill);
+        background: transparent;
+        border: 1px solid var(--line);
+        cursor: pointer;
+        transition:
+          background-color var(--dur-fast),
+          transform var(--dur-fast) var(--ease-cine);
+      }
+      .icon-btn:hover {
+        background: var(--yellow-soft);
+      }
+      .icon-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+      .theme-toggle .icon-moon,
+      [data-theme="dark"] .theme-toggle .icon-sun {
+        display: none;
+      }
+      [data-theme="dark"] .theme-toggle .icon-moon {
+        display: block;
+      }
+
+      /* Hamburguesa animada */
+      .burger span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 2px;
+        transition:
+          transform var(--dur-base) var(--ease-cine),
+          opacity var(--dur-fast);
+      }
+      .burger span + span {
+        margin-top: 5px;
+      }
+      .site-header.is-open .burger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .site-header.is-open .burger span:nth-child(2) {
+        opacity: 0;
+      }
+      .site-header.is-open .burger span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* Menú móvil */
+      .mobile-menu {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-slow) var(--ease-cine);
+      }
+      .site-header.is-open .mobile-menu {
+        grid-template-rows: 1fr;
+      }
+      .mobile-menu__inner {
+        overflow: hidden;
+      }
+      .mobile-menu ul {
+        padding: var(--space-xs) 0 var(--space-lg);
+      }
+      .mobile-menu a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0.25rem;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid var(--line);
+      }
+      .mobile-menu a[aria-current="true"] {
+        color: var(--text);
+      }
+      .mobile-menu a[aria-current="true"]::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--yellow);
+      }
+
+      /* =========================================================
+     5. HERO CINEMATOGRÁFICO
+     La carretera en perspectiva es el gesto memorable de la
+     página: une lo automotriz con la idea de viaje.
+     ========================================================= */
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding: calc(var(--header-h) + var(--space-xl)) 0
+          calc(var(--space-2xl) + 2rem);
+        background:
+          radial-gradient(
+            ellipse 80% 45% at 50% 62%,
+            hsl(var(--yellow-h) 100% 50% / 0.22),
+            transparent 70%
+          ),
+          linear-gradient(180deg, hsl(0 0% 3%) 0%, hsl(0 0% 7%) 100%);
+        color: var(--white);
+      }
+      .hero__photo {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        opacity: 0.35;
+      }
+      .hero__road {
+        position: absolute;
+        z-index: -2;
+        left: var(--road-x, 50%);
+        bottom: 0;
+        width: 150%;
+        height: 100%;
+        translate: -50% 0;
+        transform: perspective(900px) rotateX(58deg);
+        transform-origin: 50% 100%;
+        background: linear-gradient(
+          90deg,
+          transparent 20%,
+          hsl(0 0% 11%) 20% 80%,
+          transparent 80%
+        );
+        -webkit-mask-image: linear-gradient(to top, #000 35%, transparent 100%);
+        mask-image: linear-gradient(to top, #000 35%, transparent 100%);
+      }
+      .hero__road::before {
+        /* línea central discontinua en movimiento */
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 10px;
+        translate: -50% 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          var(--yellow) 0 70px,
+          transparent 70px 140px
+        );
+        animation: road-flow 1.8s linear infinite;
+        filter: drop-shadow(0 0 10px var(--yellow-glow));
+      }
+      .hero__road::after {
+        /* bordes laterales */
+        content: "";
+        position: absolute;
+        inset: 0 21%;
+        border-inline: 4px solid hsl(0 0% 100% / 0.55);
+      }
+      .hero__vignette {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 40%,
+          hsl(0 0% 0% / 0.7) 100%
+        );
+      }
+      .hero__content {
+        position: relative;
+        display: grid;
+        gap: var(--space-lg);
+      }
+      .hero__place {
+        justify-self: start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: var(--r-pill);
+        background: hsl(0 0% 100% / 0.08);
+        border: 1px solid hsl(0 0% 100% / 0.14);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+      }
+      .hero__place::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--yellow);
+        box-shadow: 0 0 0 4px var(--yellow-soft);
+      }
+      .hero__title {
+        font-size: var(--fs-hero);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.035em;
+        max-width: 12ch;
+      }
+      .hero__title span {
+        display: block;
+      }
+      .hero__title span + span {
+        color: var(--yellow);
+      }
+      .hero__lead {
+        max-width: 46ch;
+        font-size: var(--fs-lg);
+        color: hsl(0 0% 100% / 0.78);
+        line-height: 1.5;
+      }
+      .hero__ctas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+      }
+      .hero__status {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md) var(--space-lg);
+        padding-top: var(--space-md);
+        border-top: 1px solid hsl(0 0% 100% / 0.12);
+        font-size: var(--fs-sm);
+        color: hsl(0 0% 100% / 0.7);
+      }
+      .hero__status strong {
+        display: block;
+        font-family: var(--font-mono);
+        color: var(--white);
+        font-size: var(--fs-md);
+      }
+
+      /* Entrada orquestada del hero (un solo momento de carga) */
+      .hero [data-intro] {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: intro var(--dur-slow) var(--ease-cine) forwards;
+        animation-delay: calc(var(--i, 0) * 110ms + 150ms);
+      }
+
+      @keyframes road-flow {
+        to {
+          background-position: 0 140px;
+        }
+      }
+      @keyframes intro {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* =========================================================
+     6. ACCESOS RÁPIDOS
+     ========================================================= */
+      .quick {
+        position: relative;
+        z-index: 2;
+        margin-top: calc(var(--space-xl) * -1);
+      }
+      .quick__grid {
+        display: grid;
+        gap: var(--space-sm);
+      }
+      .quick-card {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: var(--space-md);
+        padding: var(--space-md);
+        border-radius: var(--r-lg);
+        text-decoration: none;
+        background: var(--glass);
+        border: 1px solid var(--glass-line);
+        backdrop-filter: blur(20px) saturate(1.3);
+        -webkit-backdrop-filter: blur(20px) saturate(1.3);
+        box-shadow: var(--shadow-lg);
+        transition:
+          transform var(--dur-base) var(--ease-cine),
+          box-shadow var(--dur-base) var(--ease-cine);
+      }
+      .quick-card:first-child {
+        background: var(--black);
+        color: var(--white);
+        border-color: transparent;
+      }
+      .quick-card:hover {
+        transform: translateY(-4px);
+      }
+      .quick-card__icon {
+        display: grid;
+        place-items: center;
+        width: 56px;
+        height: 56px;
+        border-radius: var(--r-md);
+        background: var(--yellow);
+        font-size: 1.6rem;
+      }
+      .quick-card h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+      .quick-card p {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+        line-height: 1.45;
+        margin-top: 0.2rem;
+      }
+      .quick-card:first-child p {
+        color: hsl(0 0% 100% / 0.65);
+      }
+      .quick-card__arrow {
+        width: 22px;
+        height: 22px;
+        transition: transform var(--dur-base) var(--ease-cine);
+      }
+      .quick-card:hover .quick-card__arrow {
+        transform: translateX(4px);
+      }
+
+      /* =========================================================
+     7. SECCIONES GENÉRICAS
+     ========================================================= */
+      .section {
+        padding-block: var(--space-2xl);
+      }
+      .section--tint {
+        background: var(--surface-2);
+      }
+      .section-head {
+        display: grid;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-xl);
+        max-width: 640px;
+      }
+      .section-head h2 {
+        font-size: var(--fs-xl);
+        font-weight: 800;
+      }
+      .section-head h2::before {
+        content: "";
+        display: block;
+        width: 44px;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--yellow);
+        margin-bottom: var(--space-md);
+      }
+      .section-head p {
+        color: var(--text-muted);
+        font-size: var(--fs-lg);
+        line-height: 1.5;
+      }
+
+      /* =========================================================
+     8. PARQUEADERO (bento)
+     ========================================================= */
+      .bento {
+        display: grid;
+        gap: var(--space-sm);
+        grid-template-columns: 1fr;
+      }
+      .panel {
+        position: relative;
+        overflow: hidden;
+        padding: var(--space-lg);
+        border-radius: var(--r-lg);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--neu);
+      }
+      .panel--dark {
+        background: var(--black);
+        color: var(--white);
+        border-color: transparent;
+      }
+      .panel__title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: var(--space-md);
+      }
+      .panel__title .emoji {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: var(--yellow-soft);
+        font-size: 1.1rem;
+      }
+      .panel--dark .panel__title .emoji {
+        background: var(--yellow);
+      }
+      .panel__note {
+        margin-top: var(--space-md);
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+      }
+      .panel--dark .panel__note {
+        color: hsl(0 0% 100% / 0.55);
+      }
+
+      .rates {
+        display: grid;
+        gap: 2px;
+        border-radius: var(--r-md);
+        overflow: hidden;
+      }
+      .rate {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: var(--space-md);
+        padding: 1rem var(--space-md);
+        background: hsl(0 0% 100% / 0.05);
+      }
+      .rate__icon {
+        font-size: 1.4rem;
+      }
+      .rate__name {
+        font-weight: 700;
+      }
+      .rate__unit {
+        display: block;
+        font-size: var(--fs-xs);
+        color: hsl(0 0% 100% / 0.55);
+        font-weight: 500;
+      }
+      .rate__price {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: clamp(1.2rem, 1rem + 1vw, 1.6rem);
+        color: var(--yellow);
+      }
+      .panel--rates {
+        padding-bottom: calc(var(--space-lg) + 8px);
+      }
+      .panel--rates::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 8px;
+        background: var(--hazard);
+      }
+
+      .rows {
+        display: grid;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-md);
+        padding: 0.8rem 0;
+        border-bottom: 1px dashed var(--line);
+      }
+      .row:last-child {
+        border-bottom: 0;
+      }
+      .row dd {
+        margin: 0;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        text-align: right;
+      }
+      .row dt {
+        color: var(--text-muted);
+      }
+
+      .capacity__total {
+        font-family: var(--font-display);
+        font-size: clamp(3.5rem, 3rem + 3vw, 5rem);
+        font-weight: 800;
+        line-height: 1;
+      }
+      .capacity__total small {
+        font-size: var(--fs-md);
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-left: 0.35rem;
+      }
+      .capacity__bars {
+        display: grid;
+        gap: var(--space-sm);
+        margin-top: var(--space-md);
+      }
+      .bar {
+        display: grid;
+        gap: 0.3rem;
+        font-size: var(--fs-sm);
+      }
+      .bar__label {
+        display: flex;
+        justify-content: space-between;
+      }
+      .bar__track {
+        height: 8px;
+        border-radius: 4px;
+        background: var(--surface-2);
+        overflow: hidden;
+      }
+      .bar__fill {
+        height: 100%;
+        width: var(--w);
+        background: var(--yellow);
+        border-radius: 4px;
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: transform 1.2s var(--ease-cine) 0.2s;
+      }
+      .is-visible .bar__fill {
+        transform: scaleX(1);
+      }
+
+      .checklist {
+        display: grid;
+        gap: 0.7rem;
+      }
+      .checklist li {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 0.6rem;
+        font-size: var(--fs-sm);
+        line-height: 1.45;
+      }
+      .checklist li::before {
+        content: "✓";
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--black);
+        color: var(--yellow);
+        font-weight: 800;
+        font-size: 0.75rem;
+      }
+      [data-theme="dark"] .checklist li::before {
+        background: var(--yellow);
+        color: var(--black);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .chip {
+        padding: 0.5rem 0.9rem;
+        border-radius: var(--r-pill);
+        background: var(--surface-2);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        border: 1px solid var(--line);
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-xs);
+      }
+      .gallery figure {
+        margin: 0;
+        position: relative;
+        aspect-ratio: 4 / 3;
+        border-radius: var(--r-md);
+        overflow: hidden;
+      }
+      .gallery figure:first-child {
+        grid-column: span 2;
+        aspect-ratio: 16 / 8;
+      }
+      .gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--dur-slow) var(--ease-cine);
+      }
+      .gallery figure:hover img {
+        transform: scale(1.05);
+      }
+      .gallery figcaption {
+        position: absolute;
+        inset: auto 0 0;
+        padding: 1.5rem 0.8rem 0.6rem;
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        color: var(--white);
+        background: linear-gradient(transparent, hsl(0 0% 0% / 0.7));
+      }
+
+      .map-frame {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        border: 0;
+        border-radius: var(--r-md);
+        background: var(--surface-2);
+        filter: grayscale(0.2) contrast(1.05);
+      }
+      .location {
+        display: grid;
+        gap: var(--space-md);
+      }
+      .location__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xs);
+      }
+
+      /* =========================================================
+     9. ARTE DE RESPALDO PARA IMÁGENES
+     Cuando un lugar o negocio aún no tiene foto, se genera un
+     fondo con el tono de su categoría. Así la web nunca se ve
+     rota mientras el cliente consigue las fotografías reales.
+     ========================================================= */
+      .art {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(
+            circle at 30% 20%,
+            hsl(var(--art-h) 70% 60% / 0.55),
+            transparent 55%
+          ),
+          linear-gradient(
+            150deg,
+            hsl(var(--art-h) 45% 28%),
+            hsl(var(--art-h) 40% 10%)
+          );
+      }
+      .art::after {
+        /* franja de identidad del parqueadero */
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 6px;
+        background: var(--hazard);
+        opacity: 0.9;
+      }
+      .art__emoji {
+        font-size: clamp(3rem, 2rem + 4vw, 4.5rem);
+        filter: drop-shadow(0 12px 20px hsl(0 0% 0% / 0.45));
+      }
+      .art--logo {
+        background: var(--black);
+      }
+      .art__monogram {
+        display: grid;
+        place-items: center;
+        width: 42%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 3px solid var(--yellow);
+        color: var(--yellow);
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(1.6rem, 1rem + 3vw, 2.6rem);
+        letter-spacing: -0.03em;
+        box-shadow: 0 0 40px -6px var(--yellow-glow);
+      }
+
+      /* =========================================================
+     10. FILTROS
+     ========================================================= */
+      .filters {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        margin: 0 calc(var(--space-md) * -1) var(--space-lg);
+        padding: 0.25rem var(--space-md);
+        scroll-snap-type: x proximity;
+      }
+      .filters::-webkit-scrollbar {
+        display: none;
+      }
+      .filter {
+        flex: none;
+        scroll-snap-align: start;
+        min-height: 44px;
+        padding: 0.55rem 1rem;
+        border-radius: var(--r-pill);
+        border: 1px solid var(--line);
+        background: var(--surface);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          background-color var(--dur-fast),
+          color var(--dur-fast),
+          transform var(--dur-fast) var(--ease-cine);
+      }
+      .filter:hover {
+        transform: translateY(-1px);
+      }
+      .filter[aria-pressed="true"] {
+        background: var(--black);
+        color: var(--yellow);
+        border-color: var(--black);
+      }
+      [data-theme="dark"] .filter[aria-pressed="true"] {
+        background: var(--yellow);
+        color: var(--black);
+        border-color: var(--yellow);
+      }
+
+      /* =========================================================
+     11. TARJETA EXPANDIBLE (componente compartido)
+     Misma estructura para lugares y negocios. Cerrada: foto,
+     nombre y categoría. Abierta: ocupa la fila completa y
+     despliega el panel con transición de grid-template-rows.
+     ========================================================= */
+      .card-grid {
+        display: grid;
+        gap: var(--space-md);
+        grid-template-columns: 1fr;
+      }
+      .xcard {
+        position: relative;
+        display: grid;
+        align-content: start;
+        grid-template-areas: "media" "head" "panel";
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-sm);
+        scroll-margin-top: calc(var(--header-h) + var(--space-md));
+        transition:
+          box-shadow var(--dur-base) var(--ease-cine),
+          transform var(--dur-base) var(--ease-cine);
+      }
+      .xcard:not(.is-open):hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+      }
+      .xcard:has(.xcard__toggle:focus-visible) {
+        outline: 3px solid var(--yellow);
+        outline-offset: 3px;
+      }
+      .xcard.is-open {
+        grid-column: 1 / -1;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .xcard__media {
+        grid-area: media;
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+      }
+      .xcard__media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .xcard__media img,
+      .xcard__media .art {
+        transition: transform var(--dur-slow) var(--ease-cine);
+      }
+      .xcard:not(.is-open):hover .xcard__media img,
+      .xcard:not(.is-open):hover .xcard__media .art {
+        transform: scale(1.06);
+      }
+      .xcard__media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          transparent 55%,
+          hsl(0 0% 0% / 0.35)
+        );
+        pointer-events: none;
+      }
+
+      .badge {
+        position: absolute;
+        z-index: 2;
+        top: var(--space-sm);
+        left: var(--space-sm);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: var(--r-pill);
+        background: var(--yellow);
+        color: var(--black);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 6px 18px -6px hsl(0 0% 0% / 0.5);
+      }
+
+      .xcard__head {
+        grid-area: head;
+        padding: var(--space-md) var(--space-md) var(--space-md);
+        display: grid;
+        gap: 0.25rem;
+      }
+      .xcard__category {
+        font-size: var(--fs-sm);
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+      .xcard__title {
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+      .xcard__toggle {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-sm);
+        padding: 0;
+        border: 0;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        letter-spacing: inherit;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .xcard__toggle:focus-visible {
+        outline: none;
+      }
+      .xcard__toggle::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      } /* toda la tarjeta cerrada es tocable */
+      .xcard.is-open .xcard__toggle::after {
+        content: none;
+      }
+      .xcard__plus {
+        flex: none;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--surface-2);
+        transition:
+          transform var(--dur-base) var(--ease-cine),
+          background-color var(--dur-fast);
+      }
+      .xcard__plus svg {
+        width: 18px;
+        height: 18px;
+      }
+      .xcard:hover .xcard__plus {
+        background: var(--yellow);
+        color: var(--black);
+      }
+      .xcard.is-open .xcard__plus {
+        transform: rotate(45deg);
+        background: var(--black);
+        color: var(--yellow);
+      }
+      [data-theme="dark"] .xcard.is-open .xcard__plus {
+        background: var(--yellow);
+        color: var(--black);
+      }
+
+      .xcard__panel {
+        grid-area: panel;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-slow) var(--ease-cine);
+      }
+      .xcard.is-open .xcard__panel {
+        grid-template-rows: 1fr;
+      }
+      .xcard__panel-inner {
+        min-height: 0;
+        overflow: hidden;
+      }
+      .xcard__body {
+        display: grid;
+        gap: var(--space-md);
+        padding: 0 var(--space-md) var(--space-md);
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity var(--dur-base) var(--ease-soft),
+          transform var(--dur-slow) var(--ease-cine);
+      }
+      .xcard.is-open .xcard__body {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0.12s;
+      }
+      .xcard__desc {
+        color: var(--text-muted);
+        line-height: 1.65;
+        max-width: 62ch;
+      }
+      .facts {
+        display: grid;
+        gap: var(--space-xs);
+        margin: 0;
+      }
+      .fact {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 0.7rem;
+        align-items: start;
+        padding: 0.8rem;
+        border-radius: var(--r-sm);
+        background: var(--surface-2);
+      }
+      .fact__icon {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--surface);
+        font-size: 1rem;
+      }
+      .fact dt {
+        font-size: var(--fs-xs);
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+      .fact dd {
+        margin: 0;
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        line-height: 1.45;
+      }
+      .fact a {
+        text-decoration-color: var(--yellow);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-xs);
+      }
+      .actions .btn:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+      .actions__label {
+        grid-column: 1 / -1;
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        color: var(--text-muted);
+      }
+
+      .empty {
+        grid-column: 1 / -1;
+        padding: var(--space-lg);
+        text-align: center;
+        color: var(--text-muted);
+        border: 1px dashed var(--line);
+        border-radius: var(--r-lg);
+      }
+
+      /* =========================================================
+     12. PREGUNTAS FRECUENTES (acordeón)
+     ========================================================= */
+      .faq {
+        display: grid;
+        gap: var(--space-xs);
+        max-width: 820px;
+      }
+      .faq__item {
+        border-radius: var(--r-md);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        transition:
+          box-shadow var(--dur-base),
+          border-color var(--dur-base);
+      }
+      .faq__item.is-open {
+        border-color: var(--yellow);
+        box-shadow: var(--shadow-sm);
+      }
+      .faq__q {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-md);
+        min-height: 64px;
+        padding: var(--space-md);
+        border: 0;
+        background: none;
+        cursor: pointer;
+        text-align: left;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      .faq__icon {
+        flex: none;
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--surface-2);
+        transition:
+          transform var(--dur-base) var(--ease-cine),
+          background-color var(--dur-fast);
+      }
+      .faq__icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .faq__item.is-open .faq__icon {
+        transform: rotate(180deg);
+        background: var(--yellow);
+        color: var(--black);
+      }
+      .faq__a {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-base) var(--ease-cine);
+      }
+      .faq__item.is-open .faq__a {
+        grid-template-rows: 1fr;
+      }
+      .faq__a > div {
+        min-height: 0;
+        overflow: hidden;
+      }
+      .faq__a p {
+        padding: 0 var(--space-md) var(--space-md);
+        color: var(--text-muted);
+        max-width: 64ch;
+      }
+
+      /* =========================================================
+     13. CONTACTO
+     ========================================================= */
+      .contact {
+        position: relative;
+        background: var(--black);
+        color: var(--white);
+      }
+      .contact::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 10px;
+        background: var(--hazard);
+      }
+      .contact .section-head p {
+        color: hsl(0 0% 100% / 0.65);
+      }
+      .contact__grid {
+        display: grid;
+        gap: var(--space-lg);
+      }
+      .contact-list {
+        display: grid;
+        gap: 2px;
+        border-radius: var(--r-lg);
+        overflow: hidden;
+      }
+      .contact-item {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: var(--space-md);
+        align-items: center;
+        padding: var(--space-md);
+        background: hsl(0 0% 100% / 0.05);
+      }
+      .contact-item__icon {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: var(--yellow);
+        color: var(--black);
+        font-size: 1.2rem;
+      }
+      .contact-item dt {
+        font-size: var(--fs-xs);
+        color: hsl(0 0% 100% / 0.55);
+        font-weight: 600;
+      }
+      .contact-item dd {
+        margin: 0;
+        font-weight: 600;
+      }
+      .contact-item a {
+        text-decoration: none;
+      }
+      .contact-item a:hover {
+        color: var(--yellow);
+      }
+      .contact__cta {
+        display: grid;
+        gap: var(--space-sm);
+        align-content: start;
+        padding: var(--space-lg);
+        border-radius: var(--r-lg);
+        background: linear-gradient(
+          160deg,
+          hsl(0 0% 100% / 0.09),
+          hsl(0 0% 100% / 0.02)
+        );
+        border: 1px solid hsl(0 0% 100% / 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .contact__cta h3 {
+        font-size: var(--fs-lg);
+      }
+      .contact__cta p {
+        color: hsl(0 0% 100% / 0.65);
+        margin-bottom: var(--space-xs);
+      }
+      .socials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: var(--space-xs);
+      }
+      .socials a {
+        padding: 0.55rem 1rem;
+        border-radius: var(--r-pill);
+        border: 1px solid hsl(0 0% 100% / 0.18);
+        font-size: var(--fs-sm);
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          background-color var(--dur-fast),
+          color var(--dur-fast);
+      }
+      .socials a:hover {
+        background: var(--yellow);
+        color: var(--black);
+        border-color: var(--yellow);
+      }
+
+      /* =========================================================
+     14. FOOTER
+     ========================================================= */
+      .footer {
+        padding: var(--space-xl) 0;
+        background: var(--black);
+        color: hsl(0 0% 100% / 0.6);
+        border-top: 1px solid hsl(0 0% 100% / 0.08);
+        font-size: var(--fs-sm);
+      }
+      .footer__inner {
+        display: grid;
+        gap: var(--space-md);
+      }
+      .footer .brand {
+        color: var(--white);
+      }
+      .footer nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs) var(--space-md);
+      }
+      .footer nav a {
+        text-decoration: none;
+      }
+      .footer nav a:hover {
+        color: var(--yellow);
+      }
+
+      /* =========================================================
+     15. BARRA DE ACCIÓN MÓVIL
+     ========================================================= */
+      .action-bar {
+        position: fixed;
+        z-index: 40;
+        inset: auto var(--space-sm)
+          calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: var(--space-xs);
+        padding: 0.4rem;
+        border-radius: var(--r-pill);
+        background: var(--glass);
+        border: 1px solid var(--glass-line);
+        backdrop-filter: blur(20px) saturate(1.4);
+        -webkit-backdrop-filter: blur(20px) saturate(1.4);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(160%);
+        transition: transform var(--dur-slow) var(--ease-cine);
+      }
+      .action-bar.is-visible {
+        transform: none;
+      }
+      .action-bar .btn {
+        min-height: 48px;
+      }
+
+      /* =========================================================
+     16. HOJA "CÓMO LLEGAR" (dialog nativo)
+     ========================================================= */
+      .sheet {
+        width: min(100%, 440px);
+        max-width: 100%;
+        margin: auto auto 0;
+        padding: 0;
+        border: 0;
+        border-radius: var(--r-lg) var(--r-lg) 0 0;
+        background: var(--surface);
+        color: var(--text);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(100%);
+        transition: transform var(--dur-base) var(--ease-cine);
+      }
+      .sheet.is-shown {
+        transform: none;
+      }
+      .sheet::backdrop {
+        background: hsl(0 0% 0% / 0.55);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+      }
+      .sheet__inner {
+        display: grid;
+        gap: var(--space-sm);
+        padding: var(--space-lg) var(--space-md)
+          calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
+      }
+      .sheet__grip {
+        justify-self: center;
+        width: 44px;
+        height: 5px;
+        border-radius: 3px;
+        background: var(--line);
+        margin-top: -0.75rem;
+      }
+      .sheet h2 {
+        font-size: 1.5rem;
+      }
+      .sheet p {
+        color: var(--text-muted);
+        font-size: var(--fs-sm);
+        margin-bottom: var(--space-xs);
+      }
+
+      /* =========================================================
+     17. ANIMACIONES DE ENTRADA (IntersectionObserver)
+     ========================================================= */
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity var(--dur-slow) var(--ease-cine),
+          transform var(--dur-slow) var(--ease-cine);
+        transition-delay: calc(var(--i, 0) * 80ms);
+      }
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* =========================================================
+     18. BREAKPOINTS (mobile-first)
+     ========================================================= */
+      @media (min-width: 768px) {
+        body {
+          padding-bottom: 0;
+        }
+        .container {
+          width: min(100% - 4rem, var(--container));
+        }
+        .action-bar {
+          display: none;
+        }
+        .quick__grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .quick-card {
+          grid-template-columns: 1fr;
+          align-items: start;
+          padding: var(--space-lg);
+          min-height: 240px;
+        }
+        .quick-card__arrow {
+          position: absolute;
+          top: var(--space-lg);
+          right: var(--space-lg);
+        }
+        .bento {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .panel--rates,
+        .panel--gallery,
+        .panel--location {
+          grid-column: 1 / -1;
+        }
+        .location {
+          grid-template-columns: 1.4fr 1fr;
+          align-items: center;
+        }
+        .location__actions {
+          grid-template-columns: 1fr;
+        }
+        .card-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .xcard.is-open {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+          grid-template-areas: "media head" "media panel";
+        }
+        .xcard.is-open .xcard__media {
+          aspect-ratio: auto;
+          min-height: 100%;
+        }
+        .xcard.is-open .xcard__head {
+          padding: var(--space-lg) var(--space-lg) var(--space-sm);
+        }
+        .xcard.is-open .xcard__body {
+          padding: 0 var(--space-lg) var(--space-lg);
+        }
+        .xcard.is-open .xcard__title {
+          font-size: 2rem;
+        }
+        .facts {
+          grid-template-columns: 1fr 1fr;
+        }
+        .actions {
+          grid-template-columns: repeat(3, auto);
+          justify-content: start;
+        }
+        .actions .btn:nth-child(3) {
+          grid-column: auto;
+        }
+        .contact__grid {
+          grid-template-columns: 1.3fr 1fr;
+        }
+        .footer__inner {
+          grid-template-columns: auto 1fr auto;
+          align-items: center;
+        }
+        .footer nav ul {
+          justify-content: center;
+        }
+        .filters {
+          margin-inline: 0;
+          padding-inline: 0;
+          flex-wrap: wrap;
+          overflow: visible;
+        }
+        .sheet {
+          margin: auto;
+          border-radius: var(--r-lg);
+          transform: translateY(24px) scale(0.97);
+          opacity: 0;
+          transition:
+            transform var(--dur-base) var(--ease-cine),
+            opacity var(--dur-base);
+        }
+        .sheet.is-shown {
+          transform: none;
+          opacity: 1;
+        }
+        .sheet__grip {
+          display: none;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .hero {
+          --road-x: 68%;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .nav-links {
+          display: flex;
+          gap: 0.15rem;
+          white-space: nowrap;
+        }
+        .nav-links a {
+          position: relative;
+          padding: 0.5rem 0.8rem;
+          border-radius: var(--r-pill);
+          font-size: var(--fs-sm);
+          font-weight: 600;
+          text-decoration: none;
+          transition: background-color var(--dur-fast);
+        }
+        .nav-links a:hover {
+          background: var(--yellow-soft);
+        }
+        .nav-links a[aria-current="true"]::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          bottom: 2px;
+          width: 16px;
+          height: 3px;
+          border-radius: 2px;
+          background: var(--yellow);
+          translate: -50% 0;
+        }
+        .site-header:not(.is-scrolled) .nav-links a {
+          color: var(--white);
+        }
+        .burger,
+        .mobile-menu {
+          display: none;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .bento {
+          grid-template-columns: repeat(12, 1fr);
+        }
+        .panel--rates {
+          grid-column: span 7;
+        }
+        .panel--hours {
+          grid-column: span 5;
+        }
+        .panel--capacity,
+        .panel--security,
+        .panel--payments {
+          grid-column: span 4;
+        }
+        .panel--gallery {
+          grid-column: span 7;
+        }
+        .panel--services {
+          grid-column: span 5;
+        }
+        .panel--location {
+          grid-column: 1 / -1;
+        }
+        .card-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Accesibilidad: respetar movimiento reducido */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        [data-reveal],
+        .hero [data-intro] {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- === SVG SPRITE (iconos reutilizables, DRY) === -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 12h14M13 6l6 6-6 6"
+        />
+      </symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          d="M12 5v14M5 12h14"
+        />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m6 9 6 6 6-6"
+        />
+      </symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24">
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+          />
+        </g>
+      </symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24">
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linejoin="round"
+          d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"
+        />
+      </symbol>
+    </svg>
+
+    <!-- === SECCIÓN HEADER / NAVEGACIÓN === -->
+    <header class="site-header" id="site-header">
+      <div class="container nav-bar">
+        <a
+          class="brand"
+          href="#inicio"
+          aria-label="Parqueadero Villeta, ir al inicio"
+        >
+          <span class="brand__mark" aria-hidden="true">P</span>
+          <span data-bind="shortName">Parqueadero Villeta</span>
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <ul class="nav-links" data-nav-list></ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button
+            class="icon-btn theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Cambiar entre modo claro y oscuro"
+          >
+            <svg class="icon-sun" aria-hidden="true"><use href="#i-sun" /></svg>
+            <svg class="icon-moon" aria-hidden="true">
+              <use href="#i-moon" />
+            </svg>
+          </button>
+          <button
+            class="icon-btn burger"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Abrir menú"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu__inner">
+          <nav class="container" aria-label="Navegación móvil">
+            <ul data-nav-list></ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- === SECCIÓN INICIO / HERO === -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <!-- Para usar una foto real de Villeta, agrega la URL en SITE.heroImage -->
+        <img class="hero__photo" data-hero-photo alt="" hidden />
+        <div class="hero__road" aria-hidden="true"></div>
+        <div class="hero__vignette" aria-hidden="true"></div>
+
+        <div class="container hero__content">
+          <p class="hero__place" data-intro style="--i: 0">
+            Villeta, Cundinamarca
+          </p>
+          <h1 class="hero__title" id="hero-title" data-intro style="--i: 1">
+            <span>Deja tu carro.</span>
+            <span>Descubre Villeta.</span>
+          </h1>
+          <p class="hero__lead" data-intro style="--i: 2">
+            Un parqueadero seguro en el centro del pueblo para que llegues,
+            estaciones y salgas a conocer ríos, cascadas, trapiches y buena
+            comida sin preocuparte por el carro.
+          </p>
+          <div class="hero__ctas" data-intro style="--i: 3">
+            <a class="btn btn--primary" href="#parqueadero"
+              >Conocer el parqueadero</a
+            >
+            <a class="btn btn--glass" href="#que-hacer">Qué hacer en Villeta</a>
+            <button class="btn btn--glass" type="button" data-directions>
+              <span class="btn__icon" aria-hidden="true">📍</span> Cómo llegar
+            </button>
+          </div>
+          <div class="hero__status" data-intro style="--i: 4">
+            <p>Horario<strong data-bind="hoursSummary"></strong></p>
+            <p>Carro por hora<strong data-bind="priceFrom"></strong></p>
+            <p>Cupos<strong data-bind="capacityTotal"></strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN ACCESOS RÁPIDOS === -->
+      <section class="quick" aria-label="Accesos rápidos">
+        <div class="container quick__grid">
+          <a class="quick-card" href="#parqueadero" data-reveal style="--i: 0">
+            <span class="quick-card__icon" aria-hidden="true">🅿️</span>
+            <div>
+              <h3>Parqueadero</h3>
+              <p>
+                Tarifas, horarios, seguridad y todo lo que necesitas saber antes
+                de llegar.
+              </p>
+            </div>
+            <svg class="quick-card__arrow" aria-hidden="true">
+              <use href="#i-arrow" />
+            </svg>
+          </a>
+          <a class="quick-card" href="#que-hacer" data-reveal style="--i: 1">
+            <span class="quick-card__icon" aria-hidden="true">🌴</span>
+            <div>
+              <h3>Qué hacer en Villeta</h3>
+              <p>
+                Cascadas, balnearios, caminatas y planes para toda la familia.
+              </p>
+            </div>
+            <svg class="quick-card__arrow" aria-hidden="true">
+              <use href="#i-arrow" />
+            </svg>
+          </a>
+          <a class="quick-card" href="#negocios" data-reveal style="--i: 2">
+            <span class="quick-card__icon" aria-hidden="true">🍽️</span>
+            <div>
+              <h3>Negocios recomendados</h3>
+              <p>Dónde comer, dormir y tomar algo, elegidos por nosotros.</p>
+            </div>
+            <svg class="quick-card__arrow" aria-hidden="true">
+              <use href="#i-arrow" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN PARQUEADERO === -->
+      <section class="section" id="parqueadero" aria-labelledby="parking-title">
+        <div class="container">
+          <header class="section-head" data-reveal>
+            <h2 id="parking-title">El parqueadero</h2>
+            <p>
+              Todo lo que necesitas saber para dejar tu vehículo tranquilo
+              mientras recorres Villeta.
+            </p>
+          </header>
+
+          <div class="bento">
+            <article
+              class="panel panel--dark panel--rates"
+              data-reveal
+              aria-labelledby="rates-title"
+            >
+              <h3 class="panel__title" id="rates-title">
+                <span class="emoji" aria-hidden="true">💰</span> Tarifas
+              </h3>
+              <ul class="rates" data-render="rates"></ul>
+              <p class="panel__note" data-bind="ratesNote"></p>
+            </article>
+
+            <article
+              class="panel panel--hours"
+              data-reveal
+              style="--i: 1"
+              aria-labelledby="hours-title"
+            >
+              <h3 class="panel__title" id="hours-title">
+                <span class="emoji" aria-hidden="true">🕒</span> Horarios
+              </h3>
+              <dl class="rows" data-render="hours"></dl>
+            </article>
+
+            <article
+              class="panel panel--capacity"
+              data-reveal
+              aria-labelledby="cap-title"
+            >
+              <h3 class="panel__title" id="cap-title">
+                <span class="emoji" aria-hidden="true">🚘</span> Capacidad
+              </h3>
+              <p class="capacity__total">
+                <span data-bind="capacityTotal"></span><small>cupos</small>
+              </p>
+              <div class="capacity__bars" data-render="capacity"></div>
+            </article>
+
+            <article
+              class="panel panel--security"
+              data-reveal
+              style="--i: 1"
+              aria-labelledby="sec-title"
+            >
+              <h3 class="panel__title" id="sec-title">
+                <span class="emoji" aria-hidden="true">🛡️</span> Seguridad
+              </h3>
+              <ul class="checklist" data-render="security"></ul>
+            </article>
+
+            <article
+              class="panel panel--payments"
+              data-reveal
+              style="--i: 2"
+              aria-labelledby="pay-title"
+            >
+              <h3 class="panel__title" id="pay-title">
+                <span class="emoji" aria-hidden="true">💳</span> Métodos de pago
+              </h3>
+              <ul class="chips" data-render="payments"></ul>
+            </article>
+
+            <article
+              class="panel panel--gallery"
+              data-reveal
+              aria-labelledby="gal-title"
+            >
+              <h3 class="panel__title" id="gal-title">
+                <span class="emoji" aria-hidden="true">📸</span> Galería
+              </h3>
+              <div class="gallery" data-render="gallery"></div>
+            </article>
+
+            <article
+              class="panel panel--services"
+              data-reveal
+              style="--i: 1"
+              aria-labelledby="srv-title"
+            >
+              <h3 class="panel__title" id="srv-title">
+                <span class="emoji" aria-hidden="true">✨</span> Servicios
+                adicionales
+              </h3>
+              <ul class="chips" data-render="services"></ul>
+            </article>
+
+            <article
+              class="panel panel--location"
+              data-reveal
+              aria-labelledby="loc-title"
+            >
+              <div class="location">
+                <iframe
+                  class="map-frame"
+                  data-map
+                  title="Mapa de ubicación del parqueadero"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div>
+                  <h3 class="panel__title" id="loc-title">
+                    <span class="emoji" aria-hidden="true">📍</span> Ubicación
+                  </h3>
+                  <p data-bind="address"></p>
+                  <p class="panel__note" data-bind="addressHint"></p>
+                  <div
+                    class="location__actions"
+                    data-render="parkingNav"
+                    style="margin-top: var(--space-md)"
+                  ></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN QUÉ HACER EN VILLETA === -->
+      <section
+        class="section section--tint"
+        id="que-hacer"
+        aria-labelledby="places-title"
+      >
+        <div class="container">
+          <header class="section-head" data-reveal>
+            <h2 id="places-title">Qué hacer en Villeta</h2>
+            <p>
+              Toca un lugar para ver horarios, recomendaciones y la ruta desde
+              tu celular.
+            </p>
+          </header>
+          <div
+            class="filters"
+            role="toolbar"
+            aria-label="Filtrar lugares por categoría"
+            data-filters="places"
+          ></div>
+          <div class="card-grid" data-grid="places"></div>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN NEGOCIOS RECOMENDADOS === -->
+      <section class="section" id="negocios" aria-labelledby="biz-title">
+        <div class="container">
+          <header class="section-head" data-reveal>
+            <h2 id="biz-title">Negocios recomendados</h2>
+            <p>
+              Restaurantes, hoteles y cafés que conocemos y recomendamos a
+              quienes parquean con nosotros.
+            </p>
+          </header>
+          <div
+            class="filters"
+            role="toolbar"
+            aria-label="Filtrar negocios por categoría"
+            data-filters="business"
+          ></div>
+          <div class="card-grid" data-grid="business"></div>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN PREGUNTAS FRECUENTES === -->
+      <section
+        class="section section--tint"
+        id="preguntas"
+        aria-labelledby="faq-title"
+      >
+        <div class="container">
+          <header class="section-head" data-reveal>
+            <h2 id="faq-title">Preguntas frecuentes</h2>
+            <p>Respuestas rápidas a lo que más nos preguntan en la entrada.</p>
+          </header>
+          <div class="faq" data-render="faq"></div>
+        </div>
+      </section>
+
+      <!-- === SECCIÓN CONTACTO === -->
+      <section
+        class="section contact"
+        id="contacto"
+        aria-labelledby="contact-title"
+      >
+        <div class="container">
+          <header class="section-head" data-reveal>
+            <h2 id="contact-title">Contacto</h2>
+            <p>
+              Escríbenos antes de llegar o pídenos una recomendación. Estamos
+              para ayudarte.
+            </p>
+          </header>
+          <div class="contact__grid">
+            <dl class="contact-list" data-render="contact" data-reveal></dl>
+            <aside
+              class="contact__cta"
+              data-reveal
+              style="--i: 1"
+              aria-labelledby="cta-title"
+            >
+              <h3 id="cta-title">¿Vienes en camino?</h3>
+              <p>
+                Abre la ruta en tu aplicación favorita y te esperamos en la
+                entrada.
+              </p>
+              <div class="location__actions" data-render="contactNav"></div>
+              <div class="socials" data-render="socials"></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- === SECCIÓN FOOTER === -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <a class="brand" href="#inicio"
+          ><span class="brand__mark" aria-hidden="true">P</span
+          ><span data-bind="shortName"></span
+        ></a>
+        <nav aria-label="Navegación del pie de página">
+          <ul data-nav-list></ul>
+        </nav>
+        <p>© <span data-year></span> <span data-bind="shortName"></span></p>
+      </div>
+    </footer>
+
+    <!-- === BARRA DE ACCIÓN MÓVIL === -->
+    <div class="action-bar" data-action-bar aria-label="Acciones rápidas">
+      <button class="btn btn--primary" type="button" data-directions>
+        <span class="btn__icon" aria-hidden="true">📍</span> Cómo llegar
+      </button>
+      <a class="btn btn--dark" data-whatsapp target="_blank" rel="noopener"
+        ><span class="btn__icon" aria-hidden="true">💬</span> WhatsApp</a
+      >
+    </div>
+
+    <!-- === HOJA CÓMO LLEGAR === -->
+    <dialog class="sheet" data-sheet aria-labelledby="sheet-title">
+      <div class="sheet__inner">
+        <span class="sheet__grip" aria-hidden="true"></span>
+        <h2 id="sheet-title" data-sheet-title>Cómo llegar</h2>
+        <p data-sheet-text>Elige la aplicación con la que quieres navegar.</p>
+        <div
+          class="actions"
+          data-sheet-actions
+          style="grid-template-columns: 1fr"
+        ></div>
+        <button
+          class="btn btn--outline btn--block"
+          type="button"
+          data-sheet-close
+        >
+          Cancelar
+        </button>
+      </div>
+    </dialog>
+
+    <noscript
+      ><p style="padding: 1rem; text-align: center">
+        Activa JavaScript para ver lugares, negocios y preguntas frecuentes.
+      </p></noscript
+    >
+
+    <script>
+      /* =========================================================
+     APP PARQUEADERO VILLETA
+     Todo encapsulado en una IIFE: nada se filtra al ámbito
+     global. Orden: constantes → utilidades puras → datos →
+     componentes → módulos de UI → arranque.
+     ========================================================= */
+      (() => {
+        "use strict";
+
+        /* ---------------------------------------------------------
+       1. CONSTANTES
+       --------------------------------------------------------- */
+        const MOTION = Object.freeze({
+          duration: 620,
+          easing: "cubic-bezier(.22, 1, .36, 1)",
+        });
+        const SCROLL_HEADER_OFFSET = 24;
+        const ACTION_BAR_SHOW_AFTER = 0.6; // fracción del alto de pantalla
+        const REVEAL_THRESHOLD = 0.12;
+        const SCROLL_SPY_MARGIN = "-45% 0px -50% 0px";
+        const THEME_STORAGE_KEY = "pv-theme";
+        const ALL_FILTER = "todos";
+
+        /* ---------------------------------------------------------
+       2. UTILIDADES PURAS
+       --------------------------------------------------------- */
+        const $ = (selector, root = document) => root.querySelector(selector);
+        const $$ = (selector, root = document) => [
+          ...root.querySelectorAll(selector),
+        ];
+
+        const deepFreeze = (obj) => {
+          Object.values(obj).forEach((v) => {
+            if (v && typeof v === "object") deepFreeze(v);
+          });
+          return Object.freeze(obj);
+        };
+
+        const ESCAPES = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        };
+        const esc = (value) =>
+          String(value ?? "").replace(/[&<>"']/g, (c) => ESCAPES[c]);
+
+        const reducedMotion = () =>
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const copFormatter = new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          maximumFractionDigits: 0,
+        });
+        const formatPrice = (value) => copFormatter.format(value);
+
+        /** Genera enlaces de navegación a partir de coordenadas.
+        Cada lugar puede sobrescribir googleMapsUrl o wazeUrl con cualquier enlace. */
+        const geo = (lat, lng) => ({
+          coords: { lat, lng },
+          googleMapsUrl: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
+          wazeUrl: `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`,
+        });
+
+        const whatsappUrl = (number, message = "") =>
+          `https://wa.me/${String(number).replace(/\D/g, "")}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
+
+        const telUrl = (phone) => `tel:${String(phone).replace(/[^\d+]/g, "")}`;
+        const instagramUrl = (handle) =>
+          `https://instagram.com/${String(handle).replace("@", "")}`;
+        const initials = (name) =>
+          name
+            .split(/\s+/)
+            .filter((w) => w.length > 2)
+            .slice(0, 2)
+            .map((w) => w[0])
+            .join("")
+            .toUpperCase();
+
+        /* ---------------------------------------------------------
+       3. CONFIGURACIÓN DEL PARQUEADERO
+       ⚠️ Datos de ejemplo: reemplazar por los reales del cliente.
+       --------------------------------------------------------- */
+        const SITE = deepFreeze({
+          shortName: "Parqueadero Villeta",
+          heroImage: "", // URL de una foto de Villeta o del parqueadero
+          address: "Calle 4 # 5-20, centro de Villeta, Cundinamarca",
+          addressHint: "A dos cuadras del parque principal.",
+          phone: "+57 300 000 0000",
+          whatsapp: "573000000000",
+          whatsappMessage: "Hola, quiero información sobre el parqueadero.",
+          hoursSummary: "6:00 a. m. – 10:00 p. m.",
+          ...geo(5.0128, -74.4717),
+          nav: [
+            { id: "inicio", label: "Inicio" },
+            { id: "parqueadero", label: "Parqueadero" },
+            { id: "que-hacer", label: "Qué hacer en Villeta" },
+            { id: "negocios", label: "Negocios recomendados" },
+            { id: "preguntas", label: "Preguntas frecuentes" },
+            { id: "contacto", label: "Contacto" },
+          ],
+          social: [
+            { label: "Instagram", url: "https://instagram.com/" },
+            { label: "Facebook", url: "https://facebook.com/" },
+            { label: "TikTok", url: "https://tiktok.com/" },
+          ],
+          parking: {
+            ratesNote:
+              "Fracción mínima de 30 minutos. Tarifas sujetas a cambios en temporada alta.",
+            rates: [
+              { icon: "🚗", vehicle: "Carro", unit: "por hora", price: 3000 },
+              {
+                icon: "🚙",
+                vehicle: "Camioneta",
+                unit: "por hora",
+                price: 4000,
+              },
+              { icon: "🏍️", vehicle: "Moto", unit: "por hora", price: 1500 },
+              {
+                icon: "☀️",
+                vehicle: "Día completo",
+                unit: "carro, hasta 12 horas",
+                price: 20000,
+              },
+              {
+                icon: "🌙",
+                vehicle: "Noche",
+                unit: "de 6:00 p. m. a 7:00 a. m.",
+                price: 15000,
+              },
+            ],
+            hours: [
+              { day: "Lunes a jueves", time: "6:00 a. m. – 10:00 p. m." },
+              { day: "Viernes y sábado", time: "24 horas" },
+              { day: "Domingos y festivos", time: "24 horas" },
+            ],
+            capacity: [
+              { label: "Carros", value: 45 },
+              { label: "Camionetas", value: 10 },
+              { label: "Motos", value: 20 },
+            ],
+            security: [
+              "Vigilancia presencial durante todo el horario de atención.",
+              "Cámaras de seguridad en la entrada y en todas las zonas.",
+              "Tiquete numerado con placa del vehículo.",
+              "Espacio cubierto e iluminado.",
+            ],
+            payments: [
+              "Efectivo",
+              "Nequi",
+              "Daviplata",
+              "Tarjeta débito",
+              "Tarjeta crédito",
+            ],
+            services: [
+              "Guarda de cascos",
+              "Baños",
+              "Carga de celular",
+              "Información turística",
+              "Lavado (con cita)",
+            ],
+            gallery: [
+              { image: "", caption: "Entrada principal", hue: 47, emoji: "🅿️" },
+              { image: "", caption: "Zona cubierta", hue: 220, emoji: "🚗" },
+              { image: "", caption: "Parqueo de motos", hue: 0, emoji: "🏍️" },
+            ],
+          },
+        });
+
+        const capacityTotal = SITE.parking.capacity.reduce(
+          (sum, c) => sum + c.value,
+          0,
+        );
+        const carHourlyPrice =
+          SITE.parking.rates.find((r) => r.vehicle === "Carro")?.price ?? 0;
+
+        /* ---------------------------------------------------------
+       4. CATEGORÍAS
+       Añadir una categoría = añadir una línea (abierto a extensión).
+       --------------------------------------------------------- */
+        const PLACE_CATEGORIES = deepFreeze({
+          naturaleza: { label: "Naturaleza", icon: "🌿", hue: 140 },
+          balnearios: { label: "Piscinas y balnearios", icon: "💦", hue: 195 },
+          aventura: { label: "Caminatas y aventura", icon: "🥾", hue: 25 },
+          turisticos: { label: "Lugares turísticos", icon: "🏛️", hue: 40 },
+          familiares: { label: "Planes familiares", icon: "👨‍👩‍👧", hue: 320 },
+          noche: { label: "Qué hacer en la noche", icon: "🌙", hue: 250 },
+        });
+
+        const BUSINESS_CATEGORIES = deepFreeze({
+          restaurante: { label: "Restaurante", icon: "🍽️" },
+          hotel: { label: "Hotel", icon: "🛏️" },
+          cafeteria: { label: "Cafetería", icon: "☕" },
+          heladeria: { label: "Heladería", icon: "🍦" },
+        });
+
+        /* ---------------------------------------------------------
+       5. DATOS: LUGARES TURÍSTICOS
+       ⚠️ Verificar horarios, descripciones y coordenadas en campo.
+       Para agregar un lugar, copia un objeto y cambia los datos.
+       --------------------------------------------------------- */
+        const PLACES = deepFreeze([
+          {
+            id: "salto-micos",
+            name: "Salto de los Micos",
+            category: "naturaleza",
+            image: "",
+            description:
+              "Una de las cascadas más conocidas de la región. El recorrido atraviesa vegetación tropical y termina en pozos de agua fresca ideales para refrescarse después de la caminata.",
+            hours: "Todos los días, 8:00 a. m. – 4:00 p. m.",
+            info: "Lleva calzado cerrado, agua y bloqueador. Evita ir después de lluvias fuertes.",
+            address: "Vía a Villeta, sector rural",
+            ...geo(5.0305, -74.488),
+          },
+          {
+            id: "balneario-cune",
+            name: "Balnearios de Cune",
+            category: "balnearios",
+            image: "",
+            description:
+              "Zona de piscinas y quebradas a pocos minutos del casco urbano. Plan clásico de fin de semana para pasar el día al sol.",
+            hours: "Sábados, domingos y festivos, 9:00 a. m. – 5:00 p. m.",
+            info: "La mayoría cobra entrada por persona. Hay venta de comida en el lugar.",
+            address: "Vereda Cune, Villeta",
+            ...geo(5.045, -74.455),
+          },
+          {
+            id: "caminata-mirador",
+            name: "Caminata al mirador",
+            category: "aventura",
+            image: "",
+            description:
+              "Sendero de dificultad media con vista panorámica del valle y del pueblo. Recomendado al amanecer para evitar el calor.",
+            hours: "Libre, recomendado de 6:00 a. m. a 10:00 a. m.",
+            info: "Duración aproximada de 2 horas ida y vuelta. Consulta con guías locales.",
+            address: "Salida por la vía antigua, Villeta",
+            ...geo(5.02, -74.465),
+          },
+          {
+            id: "parque-principal",
+            name: "Parque principal",
+            category: "turisticos",
+            image: "",
+            description:
+              "El corazón del pueblo: iglesia, árboles centenarios, heladerías y el ambiente tranquilo de tierra caliente. Punto de encuentro durante las fiestas de la panela.",
+            hours: "Abierto todo el día",
+            info: "A pocas cuadras caminando desde el parqueadero.",
+            address: "Centro, Villeta",
+            ...geo(5.0133, -74.4731),
+          },
+          {
+            id: "trapiche",
+            name: "Visita a un trapiche panelero",
+            category: "familiares",
+            image: "",
+            description:
+              "Villeta es tierra de panela. Conoce cómo se muele la caña y cómo se prepara la panela de forma tradicional, con degustación incluida.",
+            hours: "Lunes a sábado, 8:00 a. m. – 3:00 p. m.",
+            info: "Plan ideal con niños. Reserva previa recomendada para grupos.",
+            address: "Zona rural de Villeta",
+            ...geo(5.005, -74.48),
+          },
+          {
+            id: "noche-centro",
+            name: "Noche en el centro",
+            category: "noche",
+            image: "",
+            description:
+              "Terrazas, música y comida callejera alrededor del parque. Ambiente familiar al inicio de la noche y más movido los fines de semana.",
+            hours: "Viernes y sábados, 6:00 p. m. – 12:00 a. m.",
+            info: "Deja el carro en el parqueadero y camina: todo queda cerca.",
+            address: "Alrededores del parque principal",
+            ...geo(5.0138, -74.4725),
+          },
+        ]);
+
+        /* ---------------------------------------------------------
+       6. DATOS: NEGOCIOS RECOMENDADOS
+       ⚠️ Nombres y contactos de ejemplo.
+       --------------------------------------------------------- */
+        const BUSINESSES = deepFreeze([
+          {
+            id: "asadero-cana",
+            name: "Asadero La Caña",
+            category: "restaurante",
+            image: "",
+            recommended: true,
+            description:
+              "Carnes a la brasa, sancocho de gallina y jugos naturales. Porciones generosas y ambiente campestre.",
+            hours: "Todos los días, 11:00 a. m. – 8:00 p. m.",
+            address: "Carrera 5 # 3-15, Villeta",
+            phone: "+57 300 000 0001",
+            whatsapp: "573000000001",
+            instagram: "@asaderolacana",
+            extra:
+              "Muestra tu tiquete del parqueadero y pregunta por el descuento.",
+            ...geo(5.0125, -74.474),
+          },
+          {
+            id: "hotel-palmas",
+            name: "Hotel Las Palmas",
+            category: "hotel",
+            image: "",
+            recommended: true,
+            description:
+              "Hotel familiar con piscina, habitaciones con aire acondicionado y desayuno incluido.",
+            hours: "Recepción 24 horas",
+            address: "Calle 6 # 4-30, Villeta",
+            phone: "+57 300 000 0002",
+            whatsapp: "573000000002",
+            instagram: "@hotellaspalmasvilleta",
+            extra: "Check-in desde las 3:00 p. m.",
+            ...geo(5.0142, -74.4702),
+          },
+          {
+            id: "cafe-panela",
+            name: "Café Panela",
+            category: "cafeteria",
+            image: "",
+            recommended: false,
+            description:
+              "Café de origen colombiano, aguapanela con queso y pandebonos recién horneados.",
+            hours: "Todos los días, 7:00 a. m. – 7:00 p. m.",
+            address: "Frente al parque principal",
+            phone: "+57 300 000 0003",
+            whatsapp: "573000000003",
+            instagram: "",
+            extra: "Wifi gratis para clientes.",
+            ...geo(5.0135, -74.4733),
+          },
+          {
+            id: "helados-rio",
+            name: "Heladería El Río",
+            category: "heladeria",
+            image: "",
+            recommended: true,
+            description:
+              "Helados artesanales de frutas tropicales: mango biche, maracuyá y guanábana.",
+            hours: "Todos los días, 10:00 a. m. – 9:00 p. m.",
+            address: "Calle 4 # 6-10, Villeta",
+            phone: "+57 300 000 0004",
+            whatsapp: "",
+            instagram: "@heladeriaelrio",
+            extra: "",
+            ...geo(5.013, -74.4745),
+          },
+          {
+            id: "restaurante-fogon",
+            name: "El Fogón de la Abuela",
+            category: "restaurante",
+            image: "",
+            recommended: false,
+            description:
+              "Comida típica: bandeja paisa, ajiaco y almuerzos corrientes a buen precio.",
+            hours: "Lunes a domingo, 7:00 a. m. – 4:00 p. m.",
+            address: "Carrera 6 # 5-02, Villeta",
+            phone: "+57 300 000 0005",
+            whatsapp: "573000000005",
+            instagram: "",
+            extra: "Menú del día desde el mediodía.",
+            ...geo(5.012, -74.472),
+          },
+          {
+            id: "hostal-cafetal",
+            name: "Hostal El Cafetal",
+            category: "hotel",
+            image: "",
+            recommended: false,
+            description:
+              "Opción económica y tranquila para mochileros y parejas, con zona de hamacas.",
+            hours: "Recepción de 7:00 a. m. a 10:00 p. m.",
+            address: "Vía a Cune, kilómetro 1",
+            phone: "+57 300 000 0006",
+            whatsapp: "573000000006",
+            instagram: "@hostalelcafetal",
+            extra: "Admiten mascotas.",
+            ...geo(5.02, -74.462),
+          },
+        ]);
+
+        /* ---------------------------------------------------------
+       7. FAQ (las respuestas leen de SITE: una sola fuente de verdad)
+       --------------------------------------------------------- */
+        const FAQ = [
+          {
+            q: "¿Cuál es el precio del parqueadero?",
+            a: `La hora de carro cuesta ${formatPrice(carHourlyPrice)}. También manejamos tarifa por día completo y por noche; las ves todas en la sección Parqueadero.`,
+          },
+          {
+            q: "¿Cuál es el horario?",
+            a:
+              SITE.parking.hours.map((h) => `${h.day}: ${h.time}`).join(". ") +
+              ".",
+          },
+          {
+            q: "¿Puedo dejar el carro durante la noche?",
+            a: "Sí. Tenemos tarifa nocturna y vigilancia durante toda la noche los días de atención 24 horas.",
+          },
+          {
+            q: "¿Qué métodos de pago manejan?",
+            a: `${SITE.parking.payments.join(", ")}.`,
+          },
+          {
+            q: "¿Hay espacio para camionetas?",
+            a: `Sí, contamos con ${SITE.parking.capacity.find((c) => c.label === "Camionetas")?.value ?? 0} cupos amplios para camionetas.`,
+          },
+          {
+            q: "¿Cómo puedo llegar?",
+            a: `Estamos en ${SITE.address}. Usa el botón Cómo llegar para abrir la ruta en Google Maps o Waze.`,
+          },
+          {
+            q: "¿Puedo reservar?",
+            a: "Sí, escríbenos por WhatsApp con la fecha y la hora de llegada y te confirmamos disponibilidad.",
+          },
+          {
+            q: "¿Qué pasa si pierdo el tiquete?",
+            a: "Presenta la tarjeta de propiedad del vehículo y tu documento de identidad para verificar que el carro es tuyo antes de retirarlo.",
+          },
+        ];
+
+        /* ---------------------------------------------------------
+       8. COMPONENTES DE PRESENTACIÓN (funciones puras → HTML)
+       --------------------------------------------------------- */
+
+        /** Enlaces de navegación compartidos por tarjetas, contacto y hoja. */
+        const navButtons = (target) => {
+          const buttons = [
+            target.googleMapsUrl &&
+              `<a class="btn btn--primary" href="${esc(target.googleMapsUrl)}" target="_blank" rel="noopener"><span class="btn__icon" aria-hidden="true">📍</span> Google Maps</a>`,
+            target.wazeUrl &&
+              `<a class="btn btn--dark" href="${esc(target.wazeUrl)}" target="_blank" rel="noopener"><span class="btn__icon" aria-hidden="true">🚗</span> Waze</a>`,
+          ];
+          return buttons.filter(Boolean).join("");
+        };
+
+        const whatsappButton = (number, name) =>
+          number
+            ? `<a class="btn btn--outline" href="${esc(whatsappUrl(number, `Hola, vi ${name} en la web del ${SITE.shortName}.`))}" target="_blank" rel="noopener"><span class="btn__icon" aria-hidden="true">💬</span> WhatsApp</a>`
+            : "";
+
+        const imageOr = (image, alt, fallbackHTML) =>
+          image
+            ? `<img src="${esc(image)}" alt="${esc(alt)}" loading="lazy" decoding="async" />`
+            : fallbackHTML;
+
+        const sceneArt = (hue, emoji) =>
+          `<div class="art" style="--art-h:${hue}" aria-hidden="true"><span class="art__emoji">${emoji}</span></div>`;
+        const logoArt = (name) =>
+          `<div class="art art--logo" aria-hidden="true"><span class="art__monogram">${esc(initials(name))}</span></div>`;
+
+        const factRow = ({ icon, label, html }) => `
+      <div class="fact">
+        <span class="fact__icon" aria-hidden="true">${icon}</span>
+        <div><dt>${label}</dt><dd>${html}</dd></div>
+      </div>`;
+
+        /* ---------------------------------------------------------
+       9. VARIANTES DE TARJETA (Strategy)
+       La tarjeta es una sola; cada variante define qué categorías
+       usa, cómo pinta su imagen, qué datos muestra y qué acciones
+       ofrece. Nueva sección = nueva variante, sin tocar el componente.
+       --------------------------------------------------------- */
+        const CARD_VARIANTS = Object.freeze({
+          place: {
+            categories: PLACE_CATEGORIES,
+            media: (item, cat) =>
+              imageOr(item.image, item.name, sceneArt(cat.hue, cat.icon)),
+            badge: () => "",
+            facts: [
+              { key: "hours", icon: "🕒", label: "Horario" },
+              { key: "info", icon: "💡", label: "Información útil" },
+              { key: "address", icon: "📍", label: "Ubicación" },
+            ],
+            actions: (item) => navButtons(item),
+          },
+          business: {
+            categories: BUSINESS_CATEGORIES,
+            media: (item) =>
+              imageOr(item.image, `Logo de ${item.name}`, logoArt(item.name)),
+            badge: (item) =>
+              item.recommended
+                ? '<span class="badge"><span aria-hidden="true">★</span> Recomendado</span>'
+                : "",
+            facts: [
+              { key: "hours", icon: "🕒", label: "Horario" },
+              { key: "address", icon: "📍", label: "Dirección" },
+              {
+                key: "phone",
+                icon: "📞",
+                label: "Teléfono",
+                format: (v) => `<a href="${esc(telUrl(v))}">${esc(v)}</a>`,
+              },
+              {
+                key: "instagram",
+                icon: "📷",
+                label: "Instagram",
+                format: (v) =>
+                  `<a href="${esc(instagramUrl(v))}" target="_blank" rel="noopener">${esc(v)}</a>`,
+              },
+              { key: "extra", icon: "💡", label: "Información adicional" },
+            ],
+            actions: (item) =>
+              navButtons(item) + whatsappButton(item.whatsapp, item.name),
+          },
+        });
+
+        /** Tarjeta expandible genérica. Solo muestra los datos que existen. */
+        const renderCard = (item, variantKey) => {
+          const variant = CARD_VARIANTS[variantKey];
+          const cat = variant.categories[item.category];
+          const panelId = `${variantKey}-${item.id}-panel`;
+          const facts = variant.facts
+            .filter(({ key }) => item[key])
+            .map((f) =>
+              factRow({
+                icon: f.icon,
+                label: f.label,
+                html: f.format ? f.format(item[f.key]) : esc(item[f.key]),
+              }),
+            )
+            .join("");
+
+          return `
+        <article class="xcard" data-card data-category="${esc(item.category)}">
+          <div class="xcard__media">${variant.badge(item)}${variant.media(item, cat)}</div>
+          <div class="xcard__head">
+            <p class="xcard__category"><span aria-hidden="true">${cat.icon}</span> ${esc(cat.label)}</p>
+            <h3 class="xcard__title">
+              <button class="xcard__toggle" type="button" data-card-toggle aria-expanded="false" aria-controls="${panelId}">
+                <span>${esc(item.name)}</span>
+                <span class="xcard__plus" aria-hidden="true"><svg><use href="#i-plus"/></svg></span>
+              </button>
+            </h3>
+          </div>
+          <div class="xcard__panel" id="${panelId}" role="region" aria-label="Detalles de ${esc(item.name)}" inert>
+            <div class="xcard__panel-inner">
+              <div class="xcard__body">
+                <p class="xcard__desc">${esc(item.description)}</p>
+                <dl class="facts">${facts}</dl>
+                <div class="actions"><span class="actions__label">Dirigirme</span>${variant.actions(item)}</div>
+              </div>
+            </div>
+          </div>
+        </article>`;
+        };
+
+        /* ---------------------------------------------------------
+       10. MÓDULO: DISEÑO ANIMADO (FLIP)
+       Mide, muta y anima desde la posición anterior: las tarjetas
+       vecinas se deslizan en lugar de saltar al abrir o filtrar.
+       --------------------------------------------------------- */
+        const animateLayout = (elements, mutate) => {
+          if (reducedMotion()) {
+            mutate();
+            return;
+          }
+          const before = new Map(
+            elements.map((el) => [el, el.getBoundingClientRect()]),
+          );
+          mutate();
+          elements.forEach((el) => {
+            if (el.hidden) return;
+            const from = before.get(el);
+            const to = el.getBoundingClientRect();
+            const dx = from.left - to.left;
+            const dy = from.top - to.top;
+            const wasHidden = from.width === 0;
+            const frames = wasHidden
+              ? [
+                  { opacity: 0, transform: "translateY(16px) scale(.97)" },
+                  { opacity: 1, transform: "none" },
+                ]
+              : [
+                  { transform: `translate(${dx}px, ${dy}px)` },
+                  { transform: "none" },
+                ];
+            if (!wasHidden && Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+            el.animate(frames, {
+              duration: MOTION.duration,
+              easing: MOTION.easing,
+            });
+          });
+        };
+
+        /* ---------------------------------------------------------
+       11. MÓDULO: SECCIÓN DE TARJETAS (filtros + expansión)
+       --------------------------------------------------------- */
+        const createCardSection = ({ items, variantKey, grid, filterBar }) => {
+          const { categories } = CARD_VARIANTS[variantKey];
+          const cards = () => $$("[data-card]", grid);
+
+          const setCardOpen = (card, open) => {
+            card.classList.toggle("is-open", open);
+            $("[data-card-toggle]", card).setAttribute(
+              "aria-expanded",
+              String(open),
+            );
+            $(".xcard__panel", card).inert = !open;
+          };
+
+          const toggleCard = (card) => {
+            const willOpen = !card.classList.contains("is-open");
+            animateLayout(cards(), () => {
+              cards().forEach((c) => setCardOpen(c, false));
+              if (willOpen) setCardOpen(card, true);
+            });
+            if (willOpen) {
+              window.setTimeout(
+                () =>
+                  card.scrollIntoView({
+                    behavior: reducedMotion() ? "auto" : "smooth",
+                    block: "nearest",
+                  }),
+                MOTION.duration * 0.6,
+              );
+            }
+          };
+
+          const applyFilter = (key) => {
+            $$(".filter", filterBar).forEach((b) =>
+              b.setAttribute("aria-pressed", String(b.dataset.filter === key)),
+            );
+            animateLayout(cards(), () => {
+              cards().forEach((c) => {
+                setCardOpen(c, false);
+                c.hidden = key !== ALL_FILTER && c.dataset.category !== key;
+              });
+            });
+          };
+
+          const renderFilters = () => {
+            const used = [...new Set(items.map((i) => i.category))].filter(
+              (k) => categories[k],
+            );
+            const chip = (key, label) =>
+              `<button class="filter" type="button" data-filter="${key}" aria-pressed="${key === ALL_FILTER}">${label}</button>`;
+            filterBar.innerHTML =
+              chip(ALL_FILTER, "Todos") +
+              used
+                .map((k) =>
+                  chip(k, `${categories[k].icon} ${categories[k].label}`),
+                )
+                .join("");
+          };
+
+          const render = () => {
+            grid.innerHTML = items.length
+              ? items.map((item) => renderCard(item, variantKey)).join("")
+              : '<p class="empty">Pronto agregaremos recomendaciones aquí.</p>';
+            renderFilters();
+          };
+
+          const bindEvents = () => {
+            grid.addEventListener("click", (e) => {
+              const toggle = e.target.closest("[data-card-toggle]");
+              if (toggle) toggleCard(toggle.closest("[data-card]"));
+            });
+            filterBar.addEventListener("click", (e) => {
+              const btn = e.target.closest("[data-filter]");
+              if (btn) applyFilter(btn.dataset.filter);
+            });
+            grid.addEventListener("keydown", (e) => {
+              const open =
+                e.key === "Escape" && e.target.closest(".xcard.is-open");
+              if (!open) return;
+              toggleCard(open);
+              $("[data-card-toggle]", open).focus();
+            });
+          };
+
+          render();
+          bindEvents();
+        };
+
+        /* ---------------------------------------------------------
+       12. MÓDULO: CONTENIDO DEL PARQUEADERO Y CONTACTO
+       Cada renderizador llena un contenedor [data-render="x"].
+       --------------------------------------------------------- */
+        const RENDERERS = {
+          rates: () =>
+            SITE.parking.rates
+              .map(
+                (r) => `
+        <li class="rate">
+          <span class="rate__icon" aria-hidden="true">${r.icon}</span>
+          <span class="rate__name">${esc(r.vehicle)}<span class="rate__unit">${esc(r.unit)}</span></span>
+          <span class="rate__price">${formatPrice(r.price)}</span>
+        </li>`,
+              )
+              .join(""),
+          hours: () =>
+            SITE.parking.hours
+              .map(
+                (h) =>
+                  `<div class="row"><dt>${esc(h.day)}</dt><dd>${esc(h.time)}</dd></div>`,
+              )
+              .join(""),
+          capacity: () =>
+            SITE.parking.capacity
+              .map(
+                (c) => `
+        <div class="bar">
+          <span class="bar__label"><span>${esc(c.label)}</span><span class="mono">${c.value}</span></span>
+          <span class="bar__track"><span class="bar__fill" style="--w:${(c.value / capacityTotal) * 100}%"></span></span>
+        </div>`,
+              )
+              .join(""),
+          security: () =>
+            SITE.parking.security.map((s) => `<li>${esc(s)}</li>`).join(""),
+          payments: () =>
+            SITE.parking.payments
+              .map((p) => `<li class="chip">${esc(p)}</li>`)
+              .join(""),
+          services: () =>
+            SITE.parking.services
+              .map((s) => `<li class="chip">${esc(s)}</li>`)
+              .join(""),
+          gallery: () =>
+            SITE.parking.gallery
+              .map(
+                (g) => `
+        <figure>${imageOr(g.image, g.caption, sceneArt(g.hue, g.emoji))}<figcaption>${esc(g.caption)}</figcaption></figure>`,
+              )
+              .join(""),
+          parkingNav: () => navButtons(SITE),
+          contactNav: () => navButtons(SITE),
+          socials: () =>
+            SITE.social
+              .map(
+                (s) =>
+                  `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`,
+              )
+              .join(""),
+          contact: () =>
+            [
+              { icon: "📍", label: "Dirección", html: esc(SITE.address) },
+              {
+                icon: "📞",
+                label: "Teléfono",
+                html: `<a href="${esc(telUrl(SITE.phone))}">${esc(SITE.phone)}</a>`,
+              },
+              {
+                icon: "💬",
+                label: "WhatsApp",
+                html: `<a href="${esc(whatsappUrl(SITE.whatsapp, SITE.whatsappMessage))}" target="_blank" rel="noopener">Escríbenos ahora</a>`,
+              },
+              {
+                icon: "🕒",
+                label: "Horario",
+                html: esc(SITE.hoursSummary) + " (24 horas fines de semana)",
+              },
+            ]
+              .map(
+                (c) => `
+        <div class="contact-item">
+          <span class="contact-item__icon" aria-hidden="true">${c.icon}</span>
+          <div><dt>${c.label}</dt><dd>${c.html}</dd></div>
+        </div>`,
+              )
+              .join(""),
+          faq: () =>
+            FAQ.map(
+              (item, i) => `
+        <div class="faq__item" data-faq-item>
+          <h3>
+            <button class="faq__q" type="button" aria-expanded="false" aria-controls="faq-${i}" id="faq-q-${i}">
+              <span>${esc(item.q)}</span>
+              <span class="faq__icon" aria-hidden="true"><svg><use href="#i-chevron"/></svg></span>
+            </button>
+          </h3>
+          <div class="faq__a" id="faq-${i}" role="region" aria-labelledby="faq-q-${i}" inert><div><p>${esc(item.a)}</p></div></div>
+        </div>`,
+            ).join(""),
+        };
+
+        const BINDINGS = {
+          shortName: SITE.shortName,
+          hoursSummary: SITE.hoursSummary,
+          priceFrom: formatPrice(carHourlyPrice),
+          capacityTotal: String(capacityTotal),
+          ratesNote: SITE.parking.ratesNote,
+          address: SITE.address,
+          addressHint: SITE.addressHint,
+        };
+
+        const renderStaticContent = () => {
+          $$("[data-render]").forEach((el) => {
+            const render = RENDERERS[el.dataset.render];
+            if (render) el.innerHTML = render();
+            else console.warn(`Sin renderizador para "${el.dataset.render}"`);
+          });
+          $$("[data-bind]").forEach((el) => {
+            el.textContent = BINDINGS[el.dataset.bind] ?? "";
+          });
+          $$("[data-nav-list]").forEach((ul) => {
+            ul.innerHTML = SITE.nav
+              .map(
+                (n) =>
+                  `<li><a href="#${n.id}" data-nav-link="${n.id}">${esc(n.label)}</a></li>`,
+              )
+              .join("");
+          });
+          $$("[data-whatsapp]").forEach((a) => {
+            a.href = whatsappUrl(SITE.whatsapp, SITE.whatsappMessage);
+          });
+          $("[data-map]").src =
+            `https://www.google.com/maps?q=${SITE.coords.lat},${SITE.coords.lng}&z=16&output=embed`;
+          $("[data-year]").textContent = new Date().getFullYear();
+          if (SITE.heroImage)
+            Object.assign($("[data-hero-photo]"), {
+              src: SITE.heroImage,
+              hidden: false,
+            });
+        };
+
+        /* ---------------------------------------------------------
+       13. MÓDULO: ACORDEÓN FAQ (solo una respuesta abierta)
+       --------------------------------------------------------- */
+        const initAccordion = (root) => {
+          const setOpen = (item, open) => {
+            item.classList.toggle("is-open", open);
+            $(".faq__q", item).setAttribute("aria-expanded", String(open));
+            $(".faq__a", item).inert = !open;
+          };
+          root.addEventListener("click", (e) => {
+            const btn = e.target.closest(".faq__q");
+            if (!btn) return;
+            const item = btn.closest("[data-faq-item]");
+            const willOpen = !item.classList.contains("is-open");
+            $$("[data-faq-item]", root).forEach((i) => setOpen(i, false));
+            setOpen(item, willOpen);
+          });
+        };
+
+        /* ---------------------------------------------------------
+       14. MÓDULO: HOJA "CÓMO LLEGAR"
+       --------------------------------------------------------- */
+        const initDirectionsSheet = () => {
+          const sheet = $("[data-sheet]");
+          $("[data-sheet-actions]", sheet).innerHTML = navButtons(SITE);
+          $("[data-sheet-text]", sheet).textContent =
+            `${SITE.address}. Elige la aplicación con la que quieres navegar.`;
+
+          const open = () => {
+            if (typeof sheet.showModal !== "function") {
+              window.open(SITE.googleMapsUrl, "_blank", "noopener");
+              return;
+            }
+            sheet.showModal();
+            requestAnimationFrame(() => sheet.classList.add("is-shown"));
+          };
+          const close = () => {
+            sheet.classList.remove("is-shown");
+            window.setTimeout(() => sheet.close(), reducedMotion() ? 0 : 300);
+          };
+
+          document.addEventListener("click", (e) => {
+            if (e.target.closest("[data-directions]")) open();
+          });
+          $("[data-sheet-close]", sheet).addEventListener("click", close);
+          sheet.addEventListener("click", (e) => {
+            if (e.target === sheet) close();
+          }); // clic en el fondo
+          sheet.addEventListener("cancel", (e) => {
+            e.preventDefault();
+            close();
+          });
+        };
+
+        /* ---------------------------------------------------------
+       15. MÓDULO: HEADER, MENÚ MÓVIL Y SCROLL SPY
+       --------------------------------------------------------- */
+        const initHeader = () => {
+          const header = $("#site-header");
+          const toggle = $("[data-menu-toggle]");
+          const actionBar = $("[data-action-bar]");
+
+          const setMenu = (open) => {
+            header.classList.toggle("is-open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.setAttribute(
+              "aria-label",
+              open ? "Cerrar menú" : "Abrir menú",
+            );
+          };
+          toggle.addEventListener("click", () =>
+            setMenu(!header.classList.contains("is-open")),
+          );
+          header.addEventListener("click", (e) => {
+            if (e.target.closest("[data-nav-link]")) setMenu(false);
+          });
+
+          const onScroll = () => {
+            header.classList.toggle(
+              "is-scrolled",
+              window.scrollY > SCROLL_HEADER_OFFSET,
+            );
+            actionBar.classList.toggle(
+              "is-visible",
+              window.scrollY > window.innerHeight * ACTION_BAR_SHOW_AFTER,
+            );
+          };
+          window.addEventListener("scroll", onScroll, { passive: true });
+          onScroll();
+        };
+
+        const initScrollSpy = () => {
+          const setActive = (id) =>
+            $$("[data-nav-link]").forEach((a) => {
+              if (a.dataset.navLink === id)
+                a.setAttribute("aria-current", "true");
+              else a.removeAttribute("aria-current");
+            });
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries
+                .filter((e) => e.isIntersecting)
+                .forEach((e) => setActive(e.target.id));
+            },
+            { rootMargin: SCROLL_SPY_MARGIN },
+          );
+          SITE.nav.forEach(({ id }) => {
+            const s = document.getElementById(id);
+            if (s) observer.observe(s);
+          });
+        };
+
+        /* ---------------------------------------------------------
+       16. MÓDULO: TEMA CLARO / OSCURO
+       --------------------------------------------------------- */
+        const initTheme = () => {
+          const readStored = () => {
+            try {
+              return localStorage.getItem(THEME_STORAGE_KEY);
+            } catch {
+              return null;
+            }
+          };
+          const store = (t) => {
+            try {
+              localStorage.setItem(THEME_STORAGE_KEY, t);
+            } catch {
+              /* almacenamiento no disponible */
+            }
+          };
+          const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
+          const apply = (t) => {
+            document.documentElement.dataset.theme = t;
+          };
+
+          apply(readStored() || systemTheme);
+          $("[data-theme-toggle]").addEventListener("click", () => {
+            const next =
+              document.documentElement.dataset.theme === "dark"
+                ? "light"
+                : "dark";
+            apply(next);
+            store(next);
+          });
+        };
+
+        /* ---------------------------------------------------------
+       17. MÓDULO: ENTRADA DE SECCIONES (IntersectionObserver)
+       --------------------------------------------------------- */
+        const initReveal = () => {
+          const targets = $$("[data-reveal]");
+          if (!("IntersectionObserver" in window)) {
+            targets.forEach((t) => t.classList.add("is-visible"));
+            return;
+          }
+          const observer = new IntersectionObserver(
+            (entries, obs) => {
+              entries
+                .filter((e) => e.isIntersecting)
+                .forEach((e) => {
+                  e.target.classList.add("is-visible");
+                  obs.unobserve(e.target); // una sola vez: no distraer al volver
+                });
+            },
+            { threshold: REVEAL_THRESHOLD },
+          );
+          targets.forEach((t) => observer.observe(t));
+        };
+
+        /* ---------------------------------------------------------
+       18. ARRANQUE
+       --------------------------------------------------------- */
+        const init = () => {
+          initTheme();
+          renderStaticContent();
+          createCardSection({
+            items: PLACES,
+            variantKey: "place",
+            grid: $('[data-grid="places"]'),
+            filterBar: $('[data-filters="places"]'),
+          });
+          createCardSection({
+            items: BUSINESSES,
+            variantKey: "business",
+            grid: $('[data-grid="business"]'),
+            filterBar: $('[data-filters="business"]'),
+          });
+          initAccordion($('[data-render="faq"]'));
+          initDirectionsSheet();
+          initHeader();
+          initScrollSpy();
+          initReveal();
+        };
+
+        try {
+          init();
+        } catch (error) {
+          console.error("Error al iniciar la web del parqueadero:", error);
+        }
+      })();
+    </script>
+  </body>
+</html>
